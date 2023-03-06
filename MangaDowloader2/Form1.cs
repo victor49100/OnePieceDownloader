@@ -2,15 +2,19 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using static System.Net.Mime.MediaTypeNames;
+using static System.Net.WebRequestMethods;
 
 
 namespace MangaDowloader2
@@ -18,20 +22,54 @@ namespace MangaDowloader2
 
     public partial class Form1 : Form
     {
-        string _PATH = "C:\\Users\\Victor\\Pictures\\TEST";
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        public void DownloadFromUrl(string imageUrl)
+        public void DownloadFromUrl()
         {
-            using (WebClient webClient = new WebClient())
+            string folderPath = "C:\\Users\\Victor\\Pictures\\TEST\\";
+            WebClient webClient = new WebClient();
+            string k = "";
+
+
+            for (int i = 1; i < 40; i++)
             {
-                byte[] dataArr = webClient.DownloadData("https://static.wikia.nocookie.net/manga-encyclopedie/images/a/a3/Guts.jpg/revision/latest?cb=20160228151038&path-prefix=fr");
-                //save file to local
-                File.WriteAllBytes(_PATH, dataArr);
+                if (i < 10)
+                {
+                    k = "0" + i;
+                }
+                else
+                {
+                    k = "" + i;
+                }
+                string fileName = string.Format(i + ".png");
+                string filePath = folderPath + fileName;
+                //string imageUrl = imageUrl1 + i + imageUrl2;
+                string url = String.Format(@"https://lelscans.net/mangas/one-piece/1070/{0}.jpg?v=fr1674202018", k);
+
+
+                {
+                    try
+                    {
+                        byte[] dataArr = webClient.DownloadData(url);
+                        System.IO.File.WriteAllBytes(filePath, dataArr);
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
+                }
+                labelTest.Text = url;
+                Debug.WriteLine(url);
+                Debug.WriteLine(filePath);
+
+
             }
+
+
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -58,7 +96,7 @@ namespace MangaDowloader2
         private void Télecharger(object sender, EventArgs e)
         {
             string textUrl = textBox1.Text;
-            DownloadFromUrl(textUrl);
+            DownloadFromUrl();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
