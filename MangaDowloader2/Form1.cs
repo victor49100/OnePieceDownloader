@@ -5,6 +5,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Drawing.Text;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -20,56 +21,64 @@ using static System.Net.WebRequestMethods;
 namespace MangaDowloader2
 {
 
-    public partial class Form1 : Form
+    public partial class MangaDownloader : Form
     {
 
-        public Form1()
+        FolderBrowserDialog fbd = new FolderBrowserDialog();
+        public MangaDownloader()
         {
             InitializeComponent();
         }
 
         public void DownloadFromUrl()
         {
-            string folderPath = "C:\\Users\\Victor\\Pictures\\TEST\\";
+
             WebClient webClient = new WebClient();
             string k = "";
+            string folderPath = labelTest.Text;
 
-
-            for (int i = 1; i < 40; i++)
+            if (folderPath == "")
             {
-                if (i < 10)
-                {
-                    k = "0" + i;
-                }
-                else
-                {
-                    k = "" + i;
-                }
-                string fileName = string.Format(i + ".png");
-                string filePath = folderPath + fileName;
-                //string imageUrl = imageUrl1 + i + imageUrl2;
-                string url = String.Format(@"https://lelscans.net/mangas/one-piece/1070/{0}.jpg?v=fr1674202018", k);
+                labelTest.Text = "Aucun chemin renseigné !";
+            }
+            else
+            {
 
-
+                for (int i = 1; i < 40; i++)
                 {
-                    try
+                    if (i < 10)
                     {
-                        byte[] dataArr = webClient.DownloadData(url);
-                        System.IO.File.WriteAllBytes(filePath, dataArr);
+                        k = "0" + i;
                     }
-                    catch (Exception ex)
+                    else
                     {
-
+                        k = "" + i;
                     }
-                }
-                labelTest.Text = url;
-                Debug.WriteLine(url);
-                Debug.WriteLine(filePath);
+                    string fileName = string.Format(i + ".png");
+                    string filePath = folderPath + fileName;
+                    //string imageUrl = imageUrl1 + i + imageUrl2;
+                    string url = String.Format(@"https://lelscans.net/mangas/one-piece/1070/{0}.jpg?v=fr1674202018", k);
 
+
+                    {
+                        try
+                        {
+                            byte[] dataArr = webClient.DownloadData(url);
+                            System.IO.File.WriteAllBytes(filePath, dataArr);
+                        }
+                        catch (Exception ex)
+                        {
+
+                        }
+                    }
+                    labelTest.Text = url;
+                    Debug.WriteLine(url);
+                    Debug.WriteLine(filePath);
+
+
+                }
 
             }
-
-
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -84,7 +93,12 @@ namespace MangaDowloader2
 
         private void ChangeLocation(object sender, EventArgs e)
         {
-
+            if (fbd.ShowDialog() == DialogResult.OK)
+            {
+                //Get the path of specified file
+                string folderPath = fbd.SelectedPath;
+                labelTest.Text = folderPath;
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
