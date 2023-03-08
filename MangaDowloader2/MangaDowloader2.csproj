@@ -91,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="data.xml" />
+    <None Include="Resources\shep2.png" />
     <None Include="Resources\484b0617-d81e-11df-8228-a8bfc396a36f-gigapixel-standard-scale-4_00x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
