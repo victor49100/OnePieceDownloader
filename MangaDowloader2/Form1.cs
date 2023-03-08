@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -15,6 +16,7 @@ namespace MangaDowloader2
 
         //variable contexte
         string ComboBoxUrlDownload = "";
+        string _Path;
         public Dictionary<string, string> UrlManga = new Dictionary<string, string>();
 
         //liste manga
@@ -67,15 +69,31 @@ namespace MangaDowloader2
 
             string newChapterNumber = textBoxChapitre.Text;
             string pageNum = "";
-            string folderPath = "" + LabelFolder.Text + "\\";
-            //string Myurl = comboBox1.
-
-            if (folderPath == "")
+            if (_Path == "")
             {
-                label2.Text = "Aucun chemin renseigné !";
+                LabelPath.Text = "Aucun chemin renseigné !";
             }
             else
             {
+                //check si la path est renseigné
+                string folderPath = "" + _Path + "\\OnePiece" + newChapterNumber + "\\";
+
+
+                //string Myurl = comboBox1.
+
+                //on crée le dossier 
+                try
+                {
+                    // If the directory doesn't exist, create it.
+                    if (!Directory.Exists(folderPath))
+                    {
+                        Directory.CreateDirectory(folderPath);
+                    }
+                }
+                catch (Exception)
+                {
+                    // Fail silently
+                }
 
                 for (int i = 1; i < 40; i++)
                 {
@@ -100,6 +118,10 @@ namespace MangaDowloader2
                         }
                         catch (Exception ex)
                         {
+                            if (Directory.GetFiles(folderPath).Length == 0)
+                            {
+                                Directory.Delete(folderPath, false);
+                            }
                             break;
                         }
                     }
@@ -109,6 +131,7 @@ namespace MangaDowloader2
                 }
 
             }
+
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -122,8 +145,9 @@ namespace MangaDowloader2
             {
                 //Get the path of specified file
                 string folderPath = fbd.SelectedPath;
-                LabelFolder.Text = folderPath + "\\";
-                label2.Text = ("");
+                LabelPath.Text = folderPath + "\\";
+                _Path = folderPath + "\\";
+
 
             }
         }
@@ -164,11 +188,6 @@ namespace MangaDowloader2
 
         }
 
-        private void button3_ClickTrim(object sender, EventArgs e)
-        {
-            TrimUrl(textBoxUrl.Text);
-        }
-
         private void comboBox1_Click(object sender, EventArgs e)
         {
 
@@ -191,10 +210,14 @@ namespace MangaDowloader2
 
             var k = comboBox1.SelectedValue;
             ComboBoxUrlDownload = k.ToString();
-            label1.Text = k.ToString();
         }
 
         private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBoxChapitre_TextChanged(object sender, EventArgs e)
         {
 
         }
