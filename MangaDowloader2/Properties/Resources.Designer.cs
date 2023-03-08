@@ -69,5 +69,15 @@ namespace MangaDowloader2.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _484b0617_d81e_11df_8228_a8bfc396a36f_gigapixel_standard_scale_4_00x1 {
+            get {
+                object obj = ResourceManager.GetObject("484b0617-d81e-11df-8228-a8bfc396a36f-gigapixel-standard-scale-4_00x1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

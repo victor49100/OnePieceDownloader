@@ -1,26 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlTypes;
 using System.Diagnostics;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.Drawing.Text;
-using System.IO;
-using System.Linq;
 using System.Net;
-using System.Security.Policy;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml;
-using System.Xml.Linq;
-using static System.Net.Mime.MediaTypeNames;
-using static System.Net.WebRequestMethods;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 
 namespace MangaDowloader2
@@ -29,8 +12,11 @@ namespace MangaDowloader2
 
     public partial class MangaDownloader : Form
     {
+
+        //variable contexte
+        string ComboBoxUrlDownload = "";
         public Dictionary<string, string> UrlManga = new Dictionary<string, string>();
-        
+
         //liste manga
 
         FolderBrowserDialog fbd = new FolderBrowserDialog();
@@ -40,16 +26,16 @@ namespace MangaDowloader2
             InitializeComponent();
 
             // liste manga TODO remplacer par XML
-            UrlManga.Add("OnePiece", "https://lelscans.net/mangas/one-piece/{}/{}.jpg?v=fr1674202018");
-            UrlManga.Add("OnePiece2", "https://lelscans.net/mangas/one-piece/{}/{}.jpg?v=fr1674202018");
-            UrlManga.Add("OnePiece3", "https://lelscans.net/mangas/one-piece/{}/{}.jpg?v=fr1674202018");
+            UrlManga.Add("OnePiece", "https://lelscans.net/mangas/one-piece/{0}/{1}.jpg?v=fr1674202018");
+            UrlManga.Add("OnePiece2", "https://lelscans.net/mangas/one-piece/{0}/{1}.jpg?v=fr1674202018");
+            UrlManga.Add("OnePiece3", "https://lelscans.net/mangas/one-piece/{0}/{1}.jpg?v=fr1674202018");
 
 
             comboBox1.DataSource = new BindingSource(UrlManga, null);
             comboBox1.DisplayMember = "Key";
             comboBox1.ValueMember = "Value";
             
-            
+
         }
 
 
@@ -76,10 +62,13 @@ namespace MangaDowloader2
         //boutton Telechargé
         public void DownloadFromUrl()
         {
-            int newChapterNumber = 1070;
             WebClient webClient = new WebClient();
-            string k = "";
+
+
+            string newChapterNumber = textBoxChapitre.Text;
+            string pageNum = "";
             string folderPath = "" + LabelFolder.Text + "\\";
+            //string Myurl = comboBox1.
 
             if (folderPath == "")
             {
@@ -92,27 +81,27 @@ namespace MangaDowloader2
                 {
                     if (i < 10)
                     {
-                        k = "0" + i;
+                        pageNum = "0" + i;
                     }
                     else
                     {
-                        k = "" + i;
+                        pageNum = "" + i;
                     }
                     string fileName = string.Format(i + ".png");
                     string filePath = folderPath + fileName;
-                    //string imageUrl = imageUrl1 + i + imageUrl2;
-                    string newUrl = string.Format("https://fr-scan.com/wp-content/uploads/WP-manga/data/manga_62b4957984def/eb0cb3fbac2d003454dbf5bab87efb65/0{0}.jpeg", i);
+                    string imageUrl = string.Format(ComboBoxUrlDownload,newChapterNumber,pageNum);
+                    string newUrl = string.Format("https://fr-scan.com/wp-content/uploads/WP-manga/data/manga_62b4957984def/eb0cb3fbac2d003454dbf5bab87efb65/{0}.jpeg", pageNum);
 
                     {
                         //telecharge
                         try
                         {
-                            byte[] dataArr = webClient.DownloadData(newUrl);
+                            byte[] dataArr = webClient.DownloadData(imageUrl);
                             System.IO.File.WriteAllBytes(filePath, dataArr);
                         }
                         catch (Exception ex)
                         {
-
+                            break;
                         }
                     }
                     LabelFolder.Text = newUrl;
@@ -198,10 +187,19 @@ namespace MangaDowloader2
 
         }
 
+
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBox1.SelectedItem == null) return;
-            
+
+            var k = comboBox1.SelectedValue;
+            ComboBoxUrlDownload = k.ToString();
+            label1.Text = k.ToString();
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
