@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
-
+using System.Xml.Linq;
+using IronPython.Hosting;
+using Microsoft.Scripting.Hosting;
+using System.Drawing.Imaging;
 
 namespace MangaDowloader2
 {
@@ -17,7 +20,13 @@ namespace MangaDowloader2
 
         //variable contexte
         string ComboBoxUrlDownload = "";
+
+        //chemin dans le dossier image
         string _Path;
+
+        //chemin choisis par l'user 
+        string folderPath = "";
+
         public Dictionary<string, string> UrlManga = new Dictionary<string, string>();
 
         //liste manga
@@ -30,9 +39,11 @@ namespace MangaDowloader2
             // 0 --> Chapitre | 1 --> page
             // liste manga TODO remplacer par XML
             UrlManga.Add("Choix du site", "");
-            UrlManga.Add("OnePiece récent : lelScan", "https://lelscans.net/mangas/one-piece/{0}/{1}.jpg?v=fr1677156665");
-            UrlManga.Add("OnePiece récent2 : opfrcdn", "https://opfrcdn.xyz/uploads/manga/one-piece/chapters/{0}/vf2/{1}.jpg");
-            UrlManga.Add("chapitres OnePiece  1 à 1049", "https://www.scan-vf.net/uploads/manga/one_piece/chapters/chapitre-{0}/{1}.webp");
+            UrlManga.Add("OnePiece récent : lelScan", "https://lelscans.net/mangas/one-piece/{0}/0{1}.jpg?v=fr1677156665");
+            UrlManga.Add("OnePiece récent2 : opfrcdn", "https://opfrcdn.xyz/uploads/manga/one-piece/chapters/0{0}/vf2/{1}.jpg");
+            UrlManga.Add("chapitres OnePiece  1 à 1049", "https://www.scan-vf.net/uploads/manga/one_piece/chapters/chapitre-0{0}/{1}.webp");
+
+            UrlManga.Add("chapitres OnePiece anglais", "https://cdn.readonepiece.com/file/mangap/2/{0}/{1}.jpeg?t=1677427643");
 
 
             comboBox1.DataSource = new BindingSource(UrlManga, null);
@@ -41,26 +52,6 @@ namespace MangaDowloader2
 
 
         }
-
-
-        //Transform url
-        public void TrimUrl(string url)
-
-
-        {
-            Regex regex = new Regex(@"\/(\d+)\.(jpg|jpeg|png|webp)(?:\?.*)?");
-            Match match = regex.Match(url);
-            if (match.Success)
-            {
-                string pageNumber = match.Groups[1].Value;
-                Debug.WriteLine($"Page number: {pageNumber}");
-            }
-            else
-            {
-                Debug.WriteLine("No match found.");
-            }
-        }
-
 
 
         //boutton Telechargé
@@ -78,21 +69,26 @@ namespace MangaDowloader2
                 //LabelPath.Text = "Aucun chemin, site ou chapitre renseigné !";
                 MessageBox.Show("Aucun chemin, site ou chapitre renseigné !", "Erreur de saisie",
                                  MessageBoxButtons.OK,
-                                 MessageBoxIcon.Exclamation); 
-               
+                                 MessageBoxIcon.Exclamation);
+
             }
             else
             {
+                if (ComboBoxUrlDownload == "https://cdn.readonepiece.com/file/mangap/2/{0}/{1}.jpeg?t=1677427643")
+                {
+                    newChapterNumber = ConvertUrlToTomeOp(int.Parse(newChapterNumber));
+                }
+
                 //Création du chemin fichier
-                string folderPath = "" + _Path + "\\OnePiece_" + newChapterNumber + "\\";
+                _Path = "" + _Path + "\\OnePiece_" + newChapterNumber + "\\";
 
                 //on crée le dossier 
                 try
                 {
                     // If the directory doesn't exist, create it.
-                    if (!Directory.Exists(folderPath))
+                    if (!Directory.Exists(_Path))
                     {
-                        Directory.CreateDirectory(folderPath);
+                        Directory.CreateDirectory(_Path);
                     }
                 }
                 catch (Exception)
@@ -104,13 +100,13 @@ namespace MangaDowloader2
                 {
                     if (i < 10)
                     {
-                        pageNum = "0" + i;
+                        pageNum = "" + i;
                     }
                     else
                         pageNum = "" + i;
 
-                    string fileName = string.Format(i + ".png");
-                    string filePath = folderPath + fileName;
+                    string fileName = string.Format(i + ".jpg");
+                    string filePath = _Path + fileName;
                     string imageUrl = string.Format(ComboBoxUrlDownload, newChapterNumber, pageNum);
 
                     {
@@ -123,14 +119,14 @@ namespace MangaDowloader2
                         catch (Exception ex)
                         {
                             //destruction du Dossier si il est vide
-                            if (Directory.GetFiles(folderPath).Length == 0)
+                            if (Directory.GetFiles(_Path).Length == 0)
                             {
-                                Directory.Delete(folderPath, false);
+                                Directory.Delete(_Path, false);
                                 MessageBox.Show("aucun chapitre trouvé, essaye un autre site", "Erreur de téléchargement",
                                  MessageBoxButtons.OK,
                                  MessageBoxIcon.Exclamation);
                             }
-                            System.Windows.Forms.MessageBox.Show("Chapitre " + newChapterNumber + " téléchargé ! | " + folderPath,"OK" , MessageBoxButtons.OK);
+                            System.Windows.Forms.MessageBox.Show("Chapitre " + newChapterNumber + " téléchargé ! | " + _Path, "OK", MessageBoxButtons.OK);
                             break;
 
                         }
@@ -145,26 +141,75 @@ namespace MangaDowloader2
 
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private void ChangeLocation(object sender, EventArgs e)
+        //chemin
+        public void ChangeLocation(object sender, EventArgs e)
         {
             if (fbd.ShowDialog() == DialogResult.OK)
             {
                 //Get the path of specified file
-                string folderPath = fbd.SelectedPath;
+                folderPath = fbd.SelectedPath;
                 LabelPath.Text = folderPath + "\\";
                 _Path = folderPath + "\\";
             }
+
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void ConvertToPDF(object sender, EventArgs e)
         {
 
         }
+
+        //SELECT COMBOBOX
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedItem == null) return;
+
+            var k = comboBox1.SelectedValue;
+            ComboBoxUrlDownload = k.ToString();
+        }
+
+        public static string ConvertUrlToTomeOp(int tome)
+        {
+            string l1 = "10";
+            string l2 = "00";
+            string l3 = "00";
+
+            if (tome < 10)
+            {
+                l3 = tome.ToString() + "0";
+                string t = l1 + l2 + l3 + "00";
+                return t;
+            }
+            if (tome > 9 && tome < 100)
+            {
+                int d = int.Parse(tome.ToString().Substring(0, 1));
+                l2 = "0" + d.ToString();
+                l3 = (tome % 10).ToString() + "0";
+                Console.WriteLine(l1 + " " + l2 + " " + l3);
+                string t = l1 + l2 + l3 + "00";
+                return t;
+            }
+            if (tome > 99 && tome < 1000)
+            {
+                l2 = tome.ToString().Substring(0, 2);
+                l3 = (tome % 10).ToString() + "0";
+                string t = l1 + l2 + l3 + "00";
+                return t;
+            }
+            if (tome > 999)
+            {
+                l1 = "11";
+                l2 = tome.ToString().Substring(1, 2);
+                l3 = (tome % 10).ToString() + "0";
+                string t = l1 + l2 + l3 + "00";
+                return t;
+            }
+
+            // Retour par défaut
+            return null;
+        }
+
 
 
         private void Télecharger(object sender, EventArgs e)
@@ -173,12 +218,21 @@ namespace MangaDowloader2
             DownloadFromUrl();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
         }
 
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
         private void TextBoxUrl(object sender, EventArgs e)
         {
 
@@ -209,15 +263,6 @@ namespace MangaDowloader2
 
         }
 
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (comboBox1.SelectedItem == null) return;
-
-            var k = comboBox1.SelectedValue;
-            ComboBoxUrlDownload = k.ToString();
-        }
-
         private void label3_Click(object sender, EventArgs e)
         {
 
@@ -227,5 +272,7 @@ namespace MangaDowloader2
         {
 
         }
+
+
     }
 }

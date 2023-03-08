@@ -37,6 +37,7 @@
             this.LabelPath = new System.Windows.Forms.Label();
             this.textBoxChapitre = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // labelTitre
@@ -140,6 +141,16 @@
             this.label3.Text = "numero du chapitre";
             this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(531, 416);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(138, 34);
+            this.button3.TabIndex = 13;
+            this.button3.Text = "Convertir en PDF";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.ConvertToPDF);
+            // 
             // MangaDownloader
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -148,6 +159,7 @@
             this.BackgroundImage = global::MangaDowloader2.Properties.Resources.shep2;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(748, 509);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBoxChapitre);
             this.Controls.Add(this.LabelPath);
@@ -180,6 +192,7 @@
         private System.Windows.Forms.Label LabelPath;
         private System.Windows.Forms.TextBox textBoxChapitre;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button button3;
     }
 }
 
