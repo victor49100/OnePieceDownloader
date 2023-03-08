@@ -1,15 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
 using System.Net;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using System.Xml.Linq;
-using IronPython.Hosting;
-using Microsoft.Scripting.Hosting;
-using System.Drawing.Imaging;
 
 namespace MangaDowloader2
 {
@@ -21,7 +15,7 @@ namespace MangaDowloader2
         //variable contexte
         string ComboBoxUrlDownload = "";
 
-        //chemin dans le dossier image
+        //chemin du dossier image
         string _Path;
 
         //chemin choisis par l'user 
