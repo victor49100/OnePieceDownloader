@@ -33,9 +33,9 @@ namespace MangaDowloader2
             // 0 --> Chapitre | 1 --> page
             // liste manga TODO remplacer par XML
             UrlManga.Add("Choix du site", "");
-            UrlManga.Add("OnePiece récent : lelScan", "https://lelscans.net/mangas/one-piece/{0}/0{1}.jpg?v=fr1677156665");
-            UrlManga.Add("OnePiece récent2 : opfrcdn", "https://opfrcdn.xyz/uploads/manga/one-piece/chapters/0{0}/vf2/{1}.jpg");
-            UrlManga.Add("chapitres OnePiece  1 à 1049", "https://www.scan-vf.net/uploads/manga/one_piece/chapters/chapitre-0{0}/{1}.webp");
+            UrlManga.Add("OnePiece récent : lelScan", "https://lelscans.net/mangas/one-piece/{0}/{1}.jpg?v=fr1677156665");
+            UrlManga.Add("OnePiece récent2 : opfrcdn", "https://opfrcdn.xyz/uploads/manga/one-piece/chapters/{0}/vf2/{1}.jpg");
+            UrlManga.Add("chapitres OnePiece  1 à 1049", "https://www.scan-vf.net/uploads/manga/one_piece/chapters/chapitre-{0}/{1}.webp");
 
             UrlManga.Add("chapitres OnePiece anglais", "https://cdn.readonepiece.com/file/mangap/2/{0}/{1}.jpeg?t=1677427643");
 
@@ -92,49 +92,54 @@ namespace MangaDowloader2
 
                 for (int i = 1; i < 100; i++)
                 {
-                    if (i < 10)
-                    {
-                        pageNum = "" + i;
+                    if (ComboBoxUrlDownload == "https://cdn.readonepiece.com/file/mangap/2/{0}/{1}.jpeg?t=1677427643") {
+                        
                     }
                     else
-                        pageNum = "" + i;
-
-                    string fileName = string.Format(i + ".jpg");
-                    string filePath = _Path + fileName;
-                    string imageUrl = string.Format(ComboBoxUrlDownload, newChapterNumber, pageNum);
-
                     {
-                        //tente de telecharger les fichiers
-                        try
+                        if (i < 10)
                         {
-                            byte[] dataArr = webClient.DownloadData(imageUrl);
-                            System.IO.File.WriteAllBytes(filePath, dataArr);
+                            pageNum = "0" + i;
                         }
-                        catch (Exception ex)
+                        else { 
+                            pageNum = "" + i;
+
+                        string fileName = string.Format(pageNum + ".jpg");
+                        string filePath = _Path + fileName;
+                        string imageUrl = string.Format(ComboBoxUrlDownload, newChapterNumber, pageNum);
+
                         {
-                            //destruction du Dossier si il est vide
-                            if (Directory.GetFiles(_Path).Length == 0)
+                            //tente de telecharger les fichiers
+                            try
                             {
-                                Directory.Delete(_Path, false);
-                                MessageBox.Show("aucun chapitre trouvé, essaye un autre site", "Erreur de téléchargement",
-                                 MessageBoxButtons.OK,
-                                 MessageBoxIcon.Exclamation);
+                                byte[] dataArr = webClient.DownloadData(imageUrl);
+                                System.IO.File.WriteAllBytes(filePath, dataArr);
                             }
-                            System.Windows.Forms.MessageBox.Show("Chapitre " + newChapterNumber + " téléchargé ! | " + _Path, "OK", MessageBoxButtons.OK);
-                            break;
+                            catch (Exception ex)
+                            {
+                                //destruction du Dossier si il est vide
+                                if (Directory.GetFiles(_Path).Length == 0)
+                                {
+                                    Directory.Delete(_Path, false);
+                                    MessageBox.Show("aucun chapitre trouvé, essaye un autre site", "Erreur de téléchargement",
+                                     MessageBoxButtons.OK,
+                                     MessageBoxIcon.Exclamation);
+                                }
+                                System.Windows.Forms.MessageBox.Show("Chapitre " + newChapterNumber + " téléchargé ! | " + _Path, "OK", MessageBoxButtons.OK);
+                                break;
+
+                            }
 
                         }
+                        Debug.WriteLine(filePath);
+
 
                     }
-                    Debug.WriteLine(filePath);
-
 
                 }
 
             }
-
         }
-
 
         //chemin
         public void ChangeLocation(object sender, EventArgs e)
