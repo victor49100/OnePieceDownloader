@@ -5,6 +5,7 @@ using System.IO;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 
 namespace MangaDowloader2
@@ -26,9 +27,10 @@ namespace MangaDowloader2
         {
             //charge tt les items
             InitializeComponent();
-
+            // 0 --> Chapitre | 1 --> page
             // liste manga TODO remplacer par XML
-            UrlManga.Add("OnePiece récent : lelScan", "https://lelscans.net/mangas/one-piece/{0}/{1}.jpg?v=fr1674202018");
+            UrlManga.Add("Choix du site", "");
+            UrlManga.Add("OnePiece récent : lelScan", "https://lelscans.net/mangas/one-piece/{0}/{1}.jpg?v=fr1677156665");
             UrlManga.Add("OnePiece récent2 : opfrcdn", "https://opfrcdn.xyz/uploads/manga/one-piece/chapters/{0}/vf2/{1}.jpg");
             UrlManga.Add("chapitres OnePiece  1 à 1049", "https://www.scan-vf.net/uploads/manga/one_piece/chapters/chapitre-{0}/{1}.webp");
 
@@ -69,17 +71,20 @@ namespace MangaDowloader2
 
             string newChapterNumber = textBoxChapitre.Text;
             string pageNum = "";
-            if (_Path == "")
+
+
+            if (ComboBoxUrlDownload == "[Choix du site, ]" || _Path == null || newChapterNumber == "")
             {
-                LabelPath.Text = "Aucun chemin renseigné !";
+                //LabelPath.Text = "Aucun chemin, site ou chapitre renseigné !";
+                MessageBox.Show("Aucun chemin, site ou chapitre renseigné !", "Erreur de saisie",
+                                 MessageBoxButtons.OK,
+                                 MessageBoxIcon.Exclamation); 
+               
             }
             else
             {
-                //check si la path est renseigné
-                string folderPath = "" + _Path + "\\OnePiece" + newChapterNumber + "\\";
-
-
-                //string Myurl = comboBox1.
+                //Création du chemin fichier
+                string folderPath = "" + _Path + "\\OnePiece_" + newChapterNumber + "\\";
 
                 //on crée le dossier 
                 try
@@ -92,25 +97,24 @@ namespace MangaDowloader2
                 }
                 catch (Exception)
                 {
-                    // Fail silently
+
                 }
 
-                for (int i = 1; i < 40; i++)
+                for (int i = 1; i < 100; i++)
                 {
                     if (i < 10)
                     {
                         pageNum = "0" + i;
                     }
                     else
-                    {
                         pageNum = "" + i;
-                    }
+
                     string fileName = string.Format(i + ".png");
                     string filePath = folderPath + fileName;
                     string imageUrl = string.Format(ComboBoxUrlDownload, newChapterNumber, pageNum);
 
                     {
-                        //telecharge
+                        //tente de telecharger les fichiers
                         try
                         {
                             byte[] dataArr = webClient.DownloadData(imageUrl);
@@ -118,12 +122,19 @@ namespace MangaDowloader2
                         }
                         catch (Exception ex)
                         {
+                            //destruction du Dossier si il est vide
                             if (Directory.GetFiles(folderPath).Length == 0)
                             {
                                 Directory.Delete(folderPath, false);
+                                MessageBox.Show("aucun chapitre trouvé, essaye un autre site", "Erreur de téléchargement",
+                                 MessageBoxButtons.OK,
+                                 MessageBoxIcon.Exclamation);
                             }
+                            System.Windows.Forms.MessageBox.Show("Chapitre " + newChapterNumber + " téléchargé ! | " + folderPath,"OK" , MessageBoxButtons.OK);
                             break;
+
                         }
+
                     }
                     Debug.WriteLine(filePath);
 
@@ -147,13 +158,8 @@ namespace MangaDowloader2
                 string folderPath = fbd.SelectedPath;
                 LabelPath.Text = folderPath + "\\";
                 _Path = folderPath + "\\";
-
-
             }
         }
-
-
-
 
         private void Form1_Load(object sender, EventArgs e)
         {
