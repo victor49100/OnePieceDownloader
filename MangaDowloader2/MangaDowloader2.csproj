@@ -131,6 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="data.xml" />
+    <None Include="Resources\vaisseau.png" />
     <None Include="Resources\shep2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
