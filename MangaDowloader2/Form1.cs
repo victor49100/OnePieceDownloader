@@ -26,15 +26,15 @@ namespace MangaDowloader2
             InitializeComponent();
 
             // liste manga TODO remplacer par XML
-            UrlManga.Add("OnePiece", "https://lelscans.net/mangas/one-piece/{0}/{1}.jpg?v=fr1674202018");
-            UrlManga.Add("OnePiece2", "https://lelscans.net/mangas/one-piece/{0}/{1}.jpg?v=fr1674202018");
-            UrlManga.Add("OnePiece3", "https://lelscans.net/mangas/one-piece/{0}/{1}.jpg?v=fr1674202018");
+            UrlManga.Add("OnePiece récent : lelScan", "https://lelscans.net/mangas/one-piece/{0}/{1}.jpg?v=fr1674202018");
+            UrlManga.Add("OnePiece récent2 : opfrcdn", "https://opfrcdn.xyz/uploads/manga/one-piece/chapters/{0}/vf2/{1}.jpg");
+            UrlManga.Add("chapitres OnePiece  1 à 1049", "https://www.scan-vf.net/uploads/manga/one_piece/chapters/chapitre-{0}/{1}.webp");
 
 
             comboBox1.DataSource = new BindingSource(UrlManga, null);
             comboBox1.DisplayMember = "Key";
             comboBox1.ValueMember = "Value";
-            
+
 
         }
 
@@ -89,8 +89,7 @@ namespace MangaDowloader2
                     }
                     string fileName = string.Format(i + ".png");
                     string filePath = folderPath + fileName;
-                    string imageUrl = string.Format(ComboBoxUrlDownload,newChapterNumber,pageNum);
-                    string newUrl = string.Format("https://fr-scan.com/wp-content/uploads/WP-manga/data/manga_62b4957984def/eb0cb3fbac2d003454dbf5bab87efb65/{0}.jpeg", pageNum);
+                    string imageUrl = string.Format(ComboBoxUrlDownload, newChapterNumber, pageNum);
 
                     {
                         //telecharge
@@ -104,8 +103,6 @@ namespace MangaDowloader2
                             break;
                         }
                     }
-                    LabelFolder.Text = newUrl;
-                    Debug.WriteLine(newUrl);
                     Debug.WriteLine(filePath);
 
 
