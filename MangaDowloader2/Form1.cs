@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Windows.Forms;
+using System.Xml.Serialization;
+using static MangaDowloader2.methods;
+
 
 namespace MangaDowloader2
 {
-
-
     public partial class MangaDownloader : Form
     {
+
         Boolean finDownload = true;
 
         //variable contexte
@@ -33,20 +35,19 @@ namespace MangaDowloader2
             // 0 --> Chapitre | 1 --> page
             // liste manga TODO remplacer par XML
             UrlManga.Add("Choix du site", "");
-            UrlManga.Add("OnePiece récent : lelScan", "https://lelscans.net/mangas/one-piece/{0}/{1}.jpg?v=fr1677156665");
-            UrlManga.Add("OnePiece récent2 : opfrcdn", "https://opfrcdn.xyz/uploads/manga/one-piece/chapters/{0}/vf2/{1}.jpg");
-            UrlManga.Add("chapitres OnePiece  1 à 1049", "https://www.scan-vf.net/uploads/manga/one_piece/chapters/chapitre-{0}/{1}.webp");
-
-            UrlManga.Add("chapitres OnePiece anglais", "https://cdn.readonepiece.com/file/mangap/2/{0}/{1}.jpeg?t=1677427643");
-
+            UrlManga.Add("--- One Piece ---", "");
+            UrlManga.Add("One Piece (récent) : lelScan", "https://lelscans.net/mangas/one-piece/{0}/{1}.jpg?v=fr1677156665");
+            UrlManga.Add("One Piece (récent 2) : opfrcdn", "https://opfrcdn.xyz/uploads/manga/one-piece/chapters/{0}/vf2/{1}.jpg");
+            UrlManga.Add("OnePiece  (chaps 1 à 1049)", "https://www.scan-vf.net/uploads/manga/one_piece/chapters/chapitre-{0}/{1}.webp");
+            //special anglais
+            UrlManga.Add("One Piece (Anglais)", "https://cdn.readonepiece.com/file/mangap/2/{0}/{1}.jpeg?t=1677427643");
+            UrlManga.Add("--- Berserk ---", "");
+            UrlManga.Add("--- Jojo ---", "");
 
             comboBox1.DataSource = new BindingSource(UrlManga, null);
             comboBox1.DisplayMember = "Key";
             comboBox1.ValueMember = "Value";
-
-
         }
-
 
         //boutton Telechargé
         public void DownloadFromUrl()
@@ -74,7 +75,7 @@ namespace MangaDowloader2
                 {
                     if (ComboBoxUrlDownload == "https://cdn.readonepiece.com/file/mangap/2/{0}/{1}.jpeg?t=1677427643")
                     {
-                        newChapterNumber = ConvertUrlToTomeOp(int.Parse(newChapterNumber));
+                        newChapterNumber = methods.ConvertUrlToTomeOp(int.Parse(newChapterNumber));
                     }
 
                     //Création du chemin fichier
@@ -136,16 +137,19 @@ namespace MangaDowloader2
                                      MessageBoxIcon.Exclamation);
                                     finDownload = false;
                                     _Path = "";
+                                    LabelPath.Text = "";
                                 }
                                 else
                                 {
                                     finDownload = false;
                                     _Path = "";
+                                    LabelPath.Text = "";
                                     System.Windows.Forms.MessageBox.Show("Chapitre " + newChapterNumber + " téléchargé ! | " + _Path, "OK", MessageBoxButtons.OK);
                                 }
 
                                 finDownload = false;
                                 _Path = "";
+                                LabelPath.Text = "";
                                 break;
 
                             }
@@ -158,6 +162,8 @@ namespace MangaDowloader2
                 finDownload = false;
             }
         }
+
+
         //chemin
         public void ChangeLocation(object sender, EventArgs e)
         {
@@ -185,48 +191,6 @@ namespace MangaDowloader2
             var k = comboBox1.SelectedValue;
             ComboBoxUrlDownload = k.ToString();
         }
-
-        public static string ConvertUrlToTomeOp(int tome)
-        {
-            string l1 = "10";
-            string l2 = "00";
-            string l3 = "00";
-
-            if (tome < 10)
-            {
-                l3 = tome.ToString() + "0";
-                string t = l1 + l2 + l3 + "00";
-                return t;
-            }
-            if (tome > 9 && tome < 100)
-            {
-                int d = int.Parse(tome.ToString().Substring(0, 1));
-                l2 = "0" + d.ToString();
-                l3 = (tome % 10).ToString() + "0";
-                Console.WriteLine(l1 + " " + l2 + " " + l3);
-                string t = l1 + l2 + l3 + "00";
-                return t;
-            }
-            if (tome > 99 && tome < 1000)
-            {
-                l2 = tome.ToString().Substring(0, 2);
-                l3 = (tome % 10).ToString() + "0";
-                string t = l1 + l2 + l3 + "00";
-                return t;
-            }
-            if (tome > 999)
-            {
-                l1 = "11";
-                l2 = tome.ToString().Substring(1, 2);
-                l3 = (tome % 10).ToString() + "0";
-                string t = l1 + l2 + l3 + "00";
-                return t;
-            }
-
-            // Retour par défaut
-            return null;
-        }
-
 
 
         private void Télecharger(object sender, EventArgs e)
@@ -266,22 +230,12 @@ namespace MangaDowloader2
 
         }
 
-        private void comboBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void BoutonTelechargerCombo(object sender, EventArgs e)
         {
 
         }
 
         private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
         {
 
         }

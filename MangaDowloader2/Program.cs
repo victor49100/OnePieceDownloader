@@ -15,5 +15,8 @@ namespace MangaDowloader2
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MangaDownloader());
         }
+
     }
+
+ 
 }
