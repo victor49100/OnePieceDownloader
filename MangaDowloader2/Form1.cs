@@ -92,49 +92,54 @@ namespace MangaDowloader2
 
                 for (int i = 1; i < 100; i++)
                 {
-                    if (ComboBoxUrlDownload == "https://cdn.readonepiece.com/file/mangap/2/{0}/{1}.jpeg?t=1677427643") {
-                        
-                    }
-                    else
+                    if (ComboBoxUrlDownload != "https://cdn.readonepiece.com/file/mangap/2/{0}/{1}.jpeg?t=1677427643")
                     {
                         if (i < 10)
                         {
                             pageNum = "0" + i;
                         }
-                        else { 
-                            pageNum = "" + i;
-
-                        string fileName = string.Format(pageNum + ".jpg");
-                        string filePath = _Path + fileName;
-                        string imageUrl = string.Format(ComboBoxUrlDownload, newChapterNumber, pageNum);
-
+                        else
                         {
-                            //tente de telecharger les fichiers
-                            try
-                            {
-                                byte[] dataArr = webClient.DownloadData(imageUrl);
-                                System.IO.File.WriteAllBytes(filePath, dataArr);
-                            }
-                            catch (Exception ex)
-                            {
-                                //destruction du Dossier si il est vide
-                                if (Directory.GetFiles(_Path).Length == 0)
-                                {
-                                    Directory.Delete(_Path, false);
-                                    MessageBox.Show("aucun chapitre trouvé, essaye un autre site", "Erreur de téléchargement",
-                                     MessageBoxButtons.OK,
-                                     MessageBoxIcon.Exclamation);
-                                }
-                                System.Windows.Forms.MessageBox.Show("Chapitre " + newChapterNumber + " téléchargé ! | " + _Path, "OK", MessageBoxButtons.OK);
-                                break;
+                            pageNum = "" + i;
+                        }
+                    }
+                    else
+                    {
+                        pageNum = "" + i;
+                    }
+                    string fileName = string.Format(pageNum + ".jpg");
+                    string filePath = _Path + fileName;
+                    string imageUrl = string.Format(ComboBoxUrlDownload, newChapterNumber, pageNum);
 
+                    {
+                        //tente de telecharger les fichiers
+                        try
+                        {
+                            byte[] dataArr = webClient.DownloadData(imageUrl);
+                            System.IO.File.WriteAllBytes(filePath, dataArr);
+                        }
+                        catch (Exception ex)
+                        {
+                            //destruction du Dossier si il est vide
+                            if (Directory.GetFiles(_Path).Length == 0)
+                            {
+                                Directory.Delete(_Path, false);
+                                MessageBox.Show("aucun chapitre trouvé, essaye un autre site", "Erreur de téléchargement",
+                                 MessageBoxButtons.OK,
+                                 MessageBoxIcon.Exclamation);
                             }
+                            else
+                            {
+                                System.Windows.Forms.MessageBox.Show("Chapitre " + newChapterNumber + " téléchargé ! | " + _Path, "OK", MessageBoxButtons.OK);
+                            }
+
+                            break;
 
                         }
-                        Debug.WriteLine(filePath);
-
 
                     }
+                    Debug.WriteLine(filePath);
+
 
                 }
 
