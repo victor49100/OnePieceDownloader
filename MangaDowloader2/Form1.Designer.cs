@@ -37,7 +37,6 @@
             this.LabelPath = new System.Windows.Forms.Label();
             this.textBoxChapitre = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // labelTitre
@@ -55,7 +54,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(307, 235);
+            this.button1.Location = new System.Drawing.Point(307, 260);
             this.button1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(140, 42);
@@ -70,7 +69,7 @@
             this.button2.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.button2.FlatAppearance.BorderSize = 2;
             this.button2.Font = new System.Drawing.Font("Kabel Bd", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(321, 63);
+            this.button2.Location = new System.Drawing.Point(321, 58);
             this.button2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(112, 48);
@@ -83,7 +82,7 @@
             // 
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(257, 206);
+            this.comboBox1.Location = new System.Drawing.Point(257, 231);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(226, 23);
             this.comboBox1.TabIndex = 6;
@@ -96,7 +95,7 @@
             this.label1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label1.Font = new System.Drawing.Font("Kabel Bd", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(254, 186);
+            this.label1.Location = new System.Drawing.Point(254, 207);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(239, 17);
             this.label1.TabIndex = 7;
@@ -105,14 +104,16 @@
             // 
             // LabelPath
             // 
+            this.LabelPath.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.LabelPath.AutoSize = true;
             this.LabelPath.BackColor = System.Drawing.Color.Black;
             this.LabelPath.Font = new System.Drawing.Font("Kabel Bd", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LabelPath.ForeColor = System.Drawing.Color.Red;
-            this.LabelPath.Location = new System.Drawing.Point(233, 142);
+            this.LabelPath.Location = new System.Drawing.Point(236, 147);
             this.LabelPath.Name = "LabelPath";
             this.LabelPath.Size = new System.Drawing.Size(0, 22);
             this.LabelPath.TabIndex = 10;
+            this.LabelPath.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.LabelPath.Click += new System.EventHandler(this.label2_Click);
             // 
             // textBoxChapitre
@@ -120,7 +121,7 @@
             this.textBoxChapitre.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.textBoxChapitre.Font = new System.Drawing.Font("Orbitron", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxChapitre.ForeColor = System.Drawing.Color.Red;
-            this.textBoxChapitre.Location = new System.Drawing.Point(338, 149);
+            this.textBoxChapitre.Location = new System.Drawing.Point(340, 177);
             this.textBoxChapitre.Name = "textBoxChapitre";
             this.textBoxChapitre.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.textBoxChapitre.Size = new System.Drawing.Size(68, 27);
@@ -141,16 +142,6 @@
             this.label3.Text = "numero du chapitre";
             this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(307, 283);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(138, 60);
-            this.button3.TabIndex = 13;
-            this.button3.Text = "Convertir en PDF marche pas";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.ConvertToPDF);
-            // 
             // MangaDownloader
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -159,7 +150,6 @@
             this.BackgroundImage = global::MangaDowloader2.Properties.Resources.vaisseau;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(748, 509);
-            this.Controls.Add(this.button3);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBoxChapitre);
             this.Controls.Add(this.LabelPath);
@@ -192,7 +182,6 @@
         private System.Windows.Forms.Label LabelPath;
         private System.Windows.Forms.TextBox textBoxChapitre;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button3;
     }
 }
 

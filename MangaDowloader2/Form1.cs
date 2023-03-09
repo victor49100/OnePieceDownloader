@@ -62,7 +62,7 @@ namespace MangaDowloader2
                 string pageNum = "";
 
 
-                if (ComboBoxUrlDownload == "[Choix du site, ]" || _Path == null || newChapterNumber == "")
+                if (ComboBoxUrlDownload == "[Choix du site, ]" || _Path == null || _Path == "" | newChapterNumber == "")
                 {
                     //LabelPath.Text = "Aucun chemin, site ou chapitre renseigné !";
                     MessageBox.Show("Aucun chemin, site ou chapitre renseigné !", "Erreur de saisie",
@@ -135,14 +135,17 @@ namespace MangaDowloader2
                                      MessageBoxButtons.OK,
                                      MessageBoxIcon.Exclamation);
                                     finDownload = false;
+                                    _Path = "";
                                 }
                                 else
                                 {
                                     finDownload = false;
+                                    _Path = "";
                                     System.Windows.Forms.MessageBox.Show("Chapitre " + newChapterNumber + " téléchargé ! | " + _Path, "OK", MessageBoxButtons.OK);
                                 }
 
                                 finDownload = false;
+                                _Path = "";
                                 break;
 
                             }
@@ -158,6 +161,7 @@ namespace MangaDowloader2
         //chemin
         public void ChangeLocation(object sender, EventArgs e)
         {
+
             if (fbd.ShowDialog() == DialogResult.OK)
             {
                 //Get the path of specified file
