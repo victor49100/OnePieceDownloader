@@ -58,7 +58,6 @@ namespace MangaDowloader2
             {
                 System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.WaitCursor;
 
-
                 string newChapterNumber = textBoxChapitre.Text;
                 string pageNum = "";
 
@@ -97,7 +96,7 @@ namespace MangaDowloader2
 
                     for (int i = 1; i < 100; i++)
                     {
-
+                        
 
                         if (ComboBoxUrlDownload != "https://cdn.readonepiece.com/file/mangap/2/{0}/{1}.jpeg?t=1677427643")
                         {
@@ -117,6 +116,10 @@ namespace MangaDowloader2
                         string fileName = string.Format(pageNum + ".jpg");
                         string filePath = _Path + fileName;
                         string imageUrl = string.Format(ComboBoxUrlDownload, newChapterNumber, pageNum);
+                        if (i <= 1)
+                        {
+                            textBox1.Text = imageUrl;
+                        }
 
                         {
                             //tente de telecharger les fichiers
@@ -163,7 +166,6 @@ namespace MangaDowloader2
             }
         }
 
-
         //chemin
         public void ChangeLocation(object sender, EventArgs e)
         {
@@ -175,11 +177,6 @@ namespace MangaDowloader2
                 LabelPath.Text = folderPath + "\\";
                 _Path = folderPath + "\\";
             }
-
-        }
-
-        private void ConvertToPDF(object sender, EventArgs e)
-        {
 
         }
 
@@ -245,6 +242,9 @@ namespace MangaDowloader2
 
         }
 
+        private void textBox1_TextChanged_1(object sender, EventArgs e)
+        {
 
+        }
     }
 }

@@ -37,6 +37,8 @@
             this.LabelPath = new System.Windows.Forms.Label();
             this.textBoxChapitre = new System.Windows.Forms.TextBox();
             this.labelNumeroChapitre = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // labelTitre
@@ -139,6 +141,25 @@
             this.labelNumeroChapitre.TabIndex = 12;
             this.labelNumeroChapitre.Text = "numero du chapitre";
             // 
+            // textBox1
+            // 
+            this.textBox1.Font = new System.Drawing.Font("Kabel Bd", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Location = new System.Drawing.Point(257, 456);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(255, 20);
+            this.textBox1.TabIndex = 13;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged_1);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(337, 428);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(84, 15);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "Lien origine";
+            // 
             // MangaDownloader
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -147,6 +168,8 @@
             this.BackgroundImage = global::MangaDowloader2.Properties.Resources.vaisseau;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(748, 509);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.labelNumeroChapitre);
             this.Controls.Add(this.textBoxChapitre);
             this.Controls.Add(this.LabelPath);
@@ -179,6 +202,8 @@
         private System.Windows.Forms.Label LabelPath;
         private System.Windows.Forms.TextBox textBoxChapitre;
         private System.Windows.Forms.Label labelNumeroChapitre;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label1;
     }
 }
 
