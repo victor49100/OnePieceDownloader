@@ -34,6 +34,9 @@ namespace MangaDowloader2
             InitializeComponent();
             // 0 --> Chapitre | 1 --> page
             // liste manga TODO remplacer par XML
+            List<String> CheckList = new List<string>();
+
+
             UrlManga.Add("Choix du site", "");
             UrlManga.Add("--- One Piece ---", "");
             UrlManga.Add("One Piece (récent) : lelScan", "https://lelscans.net/mangas/one-piece/{0}/{1}.jpg?v=fr1677156665");
@@ -58,7 +61,7 @@ namespace MangaDowloader2
             {
                 System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.WaitCursor;
 
-                string newChapterNumber = textBoxChapitre.Text;
+                string newChapterNumber = numericUpDownChapter.Text;
                 string pageNum = "";
 
 
@@ -96,7 +99,7 @@ namespace MangaDowloader2
 
                     for (int i = 1; i < 100; i++)
                     {
-                        
+
 
                         if (ComboBoxUrlDownload != "https://cdn.readonepiece.com/file/mangap/2/{0}/{1}.jpeg?t=1677427643")
                         {
@@ -196,6 +199,14 @@ namespace MangaDowloader2
             DownloadFromUrl();
 
         }
+        private void CheckAvailable(object sender, EventArgs e)
+        {
+
+        }
+
+
+
+        //Fin
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -243,6 +254,16 @@ namespace MangaDowloader2
         }
 
         private void textBox1_TextChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void numericUpDownChapter_ValueChanged(object sender, EventArgs e)
         {
 
         }

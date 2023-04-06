@@ -63,19 +63,9 @@ namespace MangaDowloader2.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap shep2 {
+        internal static System.Drawing.Bitmap OnePiece {
             get {
-                object obj = ResourceManager.GetObject("shep2", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap vaisseau {
-            get {
-                object obj = ResourceManager.GetObject("vaisseau", resourceCulture);
+                object obj = ResourceManager.GetObject("OnePiece", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

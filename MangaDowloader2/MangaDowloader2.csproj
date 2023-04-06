@@ -36,7 +36,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>noodle.ico</ApplicationIcon>
+    <ApplicationIcon>faviconApp.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
@@ -135,7 +138,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="data.xml" />
-    <Content Include="noodle.ico" />
+    <Content Include="faviconApp.ico" />
+    <None Include="Resources\OnePiece.png" />
     <None Include="Resources\vaisseau.png" />
     <None Include="Resources\shep2.png" />
   </ItemGroup>
