@@ -1,6 +1,6 @@
 # MangaDowloader2
 
-Le fichier .exe est disponnible dans le repository.
+## Le fichier .exe est disponnible dans le repository.
 
 
 
