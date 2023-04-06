@@ -72,12 +72,12 @@
             this.button2.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.button2.FlatAppearance.BorderSize = 2;
             this.button2.Font = new System.Drawing.Font("Kabel Bd", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(402, 86);
+            this.button2.Location = new System.Drawing.Point(370, 81);
             this.button2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(128, 48);
+            this.button2.Size = new System.Drawing.Size(192, 54);
             this.button2.TabIndex = 4;
-            this.button2.Text = "Locallisation des fichiers";
+            this.button2.Text = "Chemin de destination du tome";
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.ChangeLocation);
             // 
@@ -111,7 +111,7 @@
             this.LabelPath.BackColor = System.Drawing.Color.Black;
             this.LabelPath.Font = new System.Drawing.Font("Kabel Bd", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LabelPath.ForeColor = System.Drawing.Color.Red;
-            this.LabelPath.Location = new System.Drawing.Point(366, 144);
+            this.LabelPath.Location = new System.Drawing.Point(353, 144);
             this.LabelPath.Name = "LabelPath";
             this.LabelPath.Size = new System.Drawing.Size(0, 22);
             this.LabelPath.TabIndex = 10;
