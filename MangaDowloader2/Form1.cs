@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Windows.Forms;
-using System.Xml.Serialization;
-using static MangaDowloader2.methods;
 
 
 namespace MangaDowloader2
@@ -42,6 +40,7 @@ namespace MangaDowloader2
             UrlManga.Add("One Piece (récent) : lelScan", "https://lelscans.net/mangas/one-piece/{0}/{1}.jpg?v=fr1677156665");
             UrlManga.Add("One Piece (récent 2) : opfrcdn", "https://opfrcdn.xyz/uploads/manga/one-piece/chapters/{0}/vf2/{1}.jpg");
             UrlManga.Add("OnePiece  (chaps 1 à 1049)", "https://www.scan-vf.net/uploads/manga/one_piece/chapters/chapitre-{0}/{1}.webp");
+            UrlManga.Add("OnePiece scan", "https://s22.anime-sama.me/s1/scans/One%20Piece/{0}/{1}.jpg");
             //special anglais
             UrlManga.Add("One Piece (Anglais)", "https://cdn.readonepiece.com/file/mangap/2/{0}/{1}.jpg");
             UrlManga.Add("One Piece (Anglais_2)", "https://cdn.readonepiece.com/file/mangap/2/{0}/{1}.png");
@@ -97,25 +96,37 @@ namespace MangaDowloader2
                     {
 
                     }
-
+                    string cacheChapter = newChapterNumber;
                     for (int i = 1; i < 100; i++)
                     {
 
 
-                        if (ComboBoxUrlDownload != "https://cdn.readonepiece.com/file/mangap/2/{0}/{1}.png")
+                        if (ComboBoxUrlDownload == "https://s22.anime-sama.me/s1/scans/One%20Piece/{0}/{1}.jpg")
                         {
-                            if (i < 10)
-                            {
-                                pageNum = "0" + i;
-                            }
-                            else
-                            {
-                                pageNum = "" + i;
-                            }
+
+                            newChapterNumber = (int.Parse(newChapterNumber) + 1).ToString();
+                            pageNum = "" + i;
+
+
                         }
                         else
                         {
-                            pageNum = "" + i;
+
+                            if (ComboBoxUrlDownload == "https://cdn.readonepiece.com/file/mangap/2/{0}/{1}.png")
+                            {
+                                pageNum = "" + i;
+                            }
+                            else
+                            {
+                                if (i < 10)
+                                {
+                                    pageNum = "0" + i;
+                                }
+                                else
+                                {
+                                    pageNum = "" + i;
+                                }
+                            }
                         }
                         string fileName = string.Format(pageNum + ".jpg");
                         string filePath = _Path + fileName;
@@ -162,7 +173,7 @@ namespace MangaDowloader2
                             }
 
                         }
-
+                        newChapterNumber = cacheChapter;
                     }
                 }
 
