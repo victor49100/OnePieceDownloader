@@ -43,7 +43,8 @@ namespace MangaDowloader2
             UrlManga.Add("One Piece (récent 2) : opfrcdn", "https://opfrcdn.xyz/uploads/manga/one-piece/chapters/{0}/vf2/{1}.jpg");
             UrlManga.Add("OnePiece  (chaps 1 à 1049)", "https://www.scan-vf.net/uploads/manga/one_piece/chapters/chapitre-{0}/{1}.webp");
             //special anglais
-            UrlManga.Add("One Piece (Anglais)", "https://cdn.readonepiece.com/file/mangap/2/{0}/{1}.jpeg?t=1677427643");
+            UrlManga.Add("One Piece (Anglais)", "https://cdn.readonepiece.com/file/mangap/2/{0}/{1}.jpg");
+            UrlManga.Add("One Piece (Anglais_2)", "https://cdn.readonepiece.com/file/mangap/2/{0}/{1}.png");
             UrlManga.Add("--- Berserk ---", "");
             UrlManga.Add("--- Jojo ---", "");
 
@@ -75,7 +76,7 @@ namespace MangaDowloader2
                 }
                 else
                 {
-                    if (ComboBoxUrlDownload == "https://cdn.readonepiece.com/file/mangap/2/{0}/{1}.jpeg?t=1677427643")
+                    if (ComboBoxUrlDownload == "https://cdn.readonepiece.com/file/mangap/2/{0}/{1}.png" || ComboBoxUrlDownload == "https://cdn.readonepiece.com/file/mangap/2/{0}/{1}.jpg")
                     {
                         newChapterNumber = methods.ConvertUrlToTomeOp(int.Parse(newChapterNumber));
                     }
@@ -101,7 +102,7 @@ namespace MangaDowloader2
                     {
 
 
-                        if (ComboBoxUrlDownload != "https://cdn.readonepiece.com/file/mangap/2/{0}/{1}.jpeg?t=1677427643")
+                        if (ComboBoxUrlDownload != "https://cdn.readonepiece.com/file/mangap/2/{0}/{1}.png")
                         {
                             if (i < 10)
                             {
