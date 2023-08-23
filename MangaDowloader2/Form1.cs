@@ -35,17 +35,15 @@ namespace MangaDowloader2
             List<String> CheckList = new List<string>();
 
 
-            UrlManga.Add("Choix du site", "");
+            UrlManga.Add("Site selection", "");
             UrlManga.Add("--- One Piece ---", "");
-            UrlManga.Add("One Piece (récent) : lelScan", "https://lelscans.net/mangas/one-piece/{0}/{1}.jpg?v=fr1677156665");
-            UrlManga.Add("One Piece (récent 2) : opfrcdn", "https://opfrcdn.xyz/uploads/manga/one-piece/chapters/{0}/vf2/{1}.jpg");
-            UrlManga.Add("OnePiece  (chaps 1 à 1049)", "https://www.scan-vf.net/uploads/manga/one_piece/chapters/chapitre-{0}/{1}.webp");
+            UrlManga.Add("One Piece (VF) : lelScan", "https://lelscans.net/mangas/one-piece/{0}/{1}.jpg?v=fr1677156665");
+            UrlManga.Add("One Piece (VF 2) : opfrcdn", "https://opfrcdn.xyz/uploads/manga/one-piece/chapters/{0}/vf2/{1}.jpg");
+            UrlManga.Add("OnePiece  (VF chapter 1 à 1049)", "https://www.scan-vf.net/uploads/manga/one_piece/chapters/chapitre-{0}/{1}.webp");
             UrlManga.Add("OnePiece scan", "https://s22.anime-sama.me/s1/scans/One%20Piece/{0}/{1}.jpg");
             //special anglais
-            UrlManga.Add("One Piece (Anglais)", "https://cdn.readonepiece.com/file/mangap/2/{0}/{1}.jpeg");
-            UrlManga.Add("One Piece (Anglais_2)", "https://cdn.readonepiece.com/file/mangap/2/{0}/{1}.jpeg");
-            UrlManga.Add("--- Berserk ---", "");
-            UrlManga.Add("--- Jojo ---", "");
+            UrlManga.Add("One Piece (English)", "https://cdn.readonepiece.com/file/mangap/2/{0}/{1}.jpeg");
+            UrlManga.Add("One Piece (English_2)", "https://cdn.readonepiece.com/file/mangap/2/{0}/{1}.jpeg");
 
             comboBox1.DataSource = new BindingSource(UrlManga, null);
             comboBox1.DisplayMember = "Key";
@@ -154,7 +152,7 @@ namespace MangaDowloader2
                                 {
                                     finDownload = false;
                                     Directory.Delete(_Path, false);
-                                    MessageBox.Show("aucun chapitre trouvé, essaye un autre site", "Erreur de téléchargement",
+                                    MessageBox.Show("no chapter found, try another site", "Download error",
                                      MessageBoxButtons.OK,
                                      MessageBoxIcon.Exclamation);
                                     finDownload = false;
@@ -166,7 +164,7 @@ namespace MangaDowloader2
                                     finDownload = false;
                                     _Path = "";
                                     LabelPath.Text = "";
-                                    System.Windows.Forms.MessageBox.Show("Chapitre " + newChapterNumber + " téléchargé ! | " + _Path, "OK", MessageBoxButtons.OK);
+                                    System.Windows.Forms.MessageBox.Show("Chapter " + newChapterNumber + " downloaded ! | " + _Path, "OK", MessageBoxButtons.OK);
                                 }
 
                                 finDownload = false;
@@ -280,6 +278,11 @@ namespace MangaDowloader2
         }
 
         private void numericUpDownChapter_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void labelTitre_Click(object sender, EventArgs e)
         {
 
         }

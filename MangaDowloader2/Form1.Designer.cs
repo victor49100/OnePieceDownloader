@@ -48,21 +48,22 @@
             this.labelTitre.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.labelTitre.Font = new System.Drawing.Font("Kabel Bd", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTitre.ForeColor = System.Drawing.Color.Transparent;
-            this.labelTitre.Location = new System.Drawing.Point(340, 44);
+            this.labelTitre.Location = new System.Drawing.Point(354, 35);
             this.labelTitre.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelTitre.Name = "labelTitre";
-            this.labelTitre.Size = new System.Drawing.Size(262, 22);
+            this.labelTitre.Size = new System.Drawing.Size(215, 22);
             this.labelTitre.TabIndex = 0;
-            this.labelTitre.Text = "One Piece Downloader Tool";
+            this.labelTitre.Text = "One Piece Downloader";
+            this.labelTitre.Click += new System.EventHandler(this.labelTitre_Click);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(388, 289);
+            this.button1.Location = new System.Drawing.Point(388, 316);
             this.button1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(156, 42);
             this.button1.TabIndex = 2;
-            this.button1.Text = "Télecharger";
+            this.button1.Text = "Download !";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.Télecharger);
             // 
@@ -75,9 +76,9 @@
             this.button2.Location = new System.Drawing.Point(370, 81);
             this.button2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(192, 54);
+            this.button2.Size = new System.Drawing.Size(199, 67);
             this.button2.TabIndex = 4;
-            this.button2.Text = "Chemin de destination du tome";
+            this.button2.Text = "Destination path of the tome to be downloaded";
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.ChangeLocation);
             // 
@@ -99,9 +100,9 @@
             this.labelTelechargerListe.ForeColor = System.Drawing.Color.White;
             this.labelTelechargerListe.Location = new System.Drawing.Point(355, 236);
             this.labelTelechargerListe.Name = "labelTelechargerListe";
-            this.labelTelechargerListe.Size = new System.Drawing.Size(239, 17);
+            this.labelTelechargerListe.Size = new System.Drawing.Size(234, 17);
             this.labelTelechargerListe.TabIndex = 7;
-            this.labelTelechargerListe.Text = "Télecharger via une liste de sites";
+            this.labelTelechargerListe.Text = "Download from a list of websites";
             this.labelTelechargerListe.Click += new System.EventHandler(this.LabelCombo);
             // 
             // LabelPath
@@ -123,11 +124,11 @@
             this.labelNumeroChapitre.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.labelNumeroChapitre.Font = new System.Drawing.Font("Kabel Bd", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelNumeroChapitre.ForeColor = System.Drawing.Color.White;
-            this.labelNumeroChapitre.Location = new System.Drawing.Point(411, 180);
+            this.labelNumeroChapitre.Location = new System.Drawing.Point(413, 166);
             this.labelNumeroChapitre.Name = "labelNumeroChapitre";
-            this.labelNumeroChapitre.Size = new System.Drawing.Size(139, 17);
+            this.labelNumeroChapitre.Size = new System.Drawing.Size(114, 17);
             this.labelNumeroChapitre.TabIndex = 12;
-            this.labelNumeroChapitre.Text = "numero du chapitre";
+            this.labelNumeroChapitre.Text = "chapter number";
             // 
             // textBox1
             // 
@@ -144,16 +145,16 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(432, 457);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(95, 15);
+            this.label1.Size = new System.Drawing.Size(78, 15);
             this.label1.TabIndex = 14;
-            this.label1.Text = "Lien d\'origine";
+            this.label1.Text = "Source link";
             this.label1.Click += new System.EventHandler(this.label1_Click_1);
             // 
             // numericUpDownChapter
             // 
             this.numericUpDownChapter.BackColor = System.Drawing.SystemColors.MenuText;
             this.numericUpDownChapter.ForeColor = System.Drawing.Color.OrangeRed;
-            this.numericUpDownChapter.Location = new System.Drawing.Point(419, 210);
+            this.numericUpDownChapter.Location = new System.Drawing.Point(419, 193);
             this.numericUpDownChapter.Maximum = new decimal(new int[] {
             3000,
             0,
