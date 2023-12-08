@@ -39,6 +39,7 @@ namespace MangaDowloader2
 
             UrlManga.Add("Choix du site", "");
             UrlManga.Add("--- One Piece ---", "");
+            UrlManga.Add("One Piece (récent) : MangaMoin", "https://mangamoins.shaeishu.co/files/scans/OP{0}/{1}.png");
             UrlManga.Add("One Piece (récent) : lelScan", "https://lelscans.net/mangas/one-piece/{0}/{1}.jpg?v=fr1677156665");
             UrlManga.Add("One Piece (récent 2) : opfrcdn", "https://opfrcdn.xyz/uploads/manga/one-piece/chapters/{0}/vf2/{1}.jpg");
             UrlManga.Add("OnePiece  (chaps 1 à 1049)", "https://www.scan-vf.net/uploads/manga/one_piece/chapters/chapitre-{0}/{1}.webp");
